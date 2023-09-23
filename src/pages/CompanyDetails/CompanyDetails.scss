@@ -1,0 +1,21 @@
+@import "../../scss/mixins";
+
+.company {
+    @include d-flex();
+    flex-direction: column;
+
+    &__job-list {
+        margin-top: 20px;
+    }
+}
+
+// body {
+//     overflow-x: hidden;
+// }
+
+.overflow, .ant-card-head {
+    // max-width: 300px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

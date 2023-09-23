@@ -1,0 +1,55 @@
+@import '../../scss/mixins';
+
+.header {
+    @include d-flex();
+    justify-content: space-between;
+    background-color: #F1F1F1;
+    padding: 10px 80px;
+    align-items: center;
+    position: sticky;
+    z-index: 999;
+    top: 0;
+    left: 0;
+    right: 0;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+
+    &__name {
+        a {
+            text-decoration: none;
+            color: blue;
+            font-weight: 800;
+            font-size: 30px;
+        }
+    }
+
+    &__actions {
+        @include d-flex();
+        column-gap: 10px;
+    }
+}
+
+.company-name {
+    display: flex;
+    align-items: center;
+}
+
+.p20 {
+    padding: 30px 80px 30px 80px;
+}
+
+.footer {
+    background-color: #282828;
+    height: 100px;
+    margin-top: 30px;
+    // position: fixed;
+    // margin-bottom: 0px;
+    // left: 0;
+    // bottom: 0;
+    width: 100%;
+    @include flex-center();
+
+    &__content {
+        // height: 100%;
+        color: white;
+    }
+}

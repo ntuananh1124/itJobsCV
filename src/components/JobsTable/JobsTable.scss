@@ -1,0 +1,6 @@
+@import "../../scss/mixins";
+
+.actions {
+    @include d-flex();
+    column-gap: 5px;
+}

@@ -1,0 +1,65 @@
+@mixin d-flex() {
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+}
+
+@mixin flex-wrap() {
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+}
+
+@mixin flex-center() {
+    @include d-flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@mixin inline-block() {
+    display: -moz-inline-stack;
+    display: inline-block;
+}
+
+@mixin text-limit($line-height, $line-num) {
+    @include inline-block();
+    display: -webkit-box;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: $line-height;
+    height: calc($line-height * $line-num);
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: $line-num;
+}
+
+@mixin btn($color) {
+    border: none;
+    border-radius: 5px;
+    padding: 7px 10px;
+    background-color: $color;
+    color: white;
+    cursor: pointer;
+    transition: 0.3s ease-in-out;
+}
+
+@mixin col($borderRadius) {
+    flex: 1;
+    border-radius: $borderRadius;
+    cursor: pointer;
+}
+
+@mixin imgHandle() {
+    width: 100%;
+    object-fit: cover;
+    object-position: center;
+    height: 100%;
+}
+
+@mixin correct-false($color) {
+    background-color: $color;
+    color: white;
+    border-radius: 5px;
+    padding: 0 5px;
+    margin-left: 10px;
+}

@@ -1,0 +1,24 @@
+@import "../../scss/mixins";
+
+.register {
+    @include flex-center();
+    flex-direction: column;
+
+    &__name {
+        text-align: center;
+    }
+}
+
+.submit-btn {
+    text-align: center;
+}
+
+.ant-form-item-required {
+    min-width: 90px !important;
+    max-width: none !important;
+}
+
+label {
+    min-width: 100px !important;
+    max-width: none !important;
+}

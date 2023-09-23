@@ -1,0 +1,31 @@
+@import "../../scss/mixins";
+
+.login {
+    @include flex-center();
+    flex-direction: column;
+
+    &__form {
+        &__name {
+            text-align: center;
+        }
+
+        &__btn {
+            text-align: center;
+        }
+
+        &__to-register {
+            margin-bottom: 20px;
+            text-align: end;
+        }
+    }
+}
+
+.ant-form-item-required {
+    min-width: 100px !important;
+    max-width: none !important;
+}
+
+label {
+    min-width: 100px !important;
+    max-width: none !important;
+}

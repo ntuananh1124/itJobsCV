@@ -1,0 +1,20 @@
+@import '../../scss/mixins';
+
+.header {
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+
+    &__account {
+        &__name {
+            @include d-flex();
+            column-gap: 8px;
+        }
+    }
+}
+
+:where(.css-dev-only-do-not-override-1vr7spz) a {
+    transition: none !important;
+}
+
+.content {
+    padding: 30px;
+}

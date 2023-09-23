@@ -1,0 +1,11 @@
+@import "../../scss/mixins";
+
+.result-keyword {
+    display: inline-block !important;
+}
+
+.result {
+    @include d-flex();
+    align-items: center;
+    column-gap: 15px;
+}
