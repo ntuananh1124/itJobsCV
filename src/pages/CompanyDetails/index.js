@@ -73,7 +73,7 @@ export default function CompanyDetails() {
         // console.log(jobs);
     }
 
-    console.log(jobList);
+    // console.log(jobList);
 
     useEffect(() => {
         fetchApi()
