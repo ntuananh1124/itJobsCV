@@ -1,4 +1,4 @@
-const API_DOMAIN = 'http://localhost:3008/';
+const API_DOMAIN = 'http://localhost:3000/';
 // const API_DOMAIN = 'https://it-jobs-database.vercel.app/';
 
 export const get = async (path) => {
