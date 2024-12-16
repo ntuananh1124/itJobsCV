@@ -7,6 +7,7 @@ import "./JobDetails.scss"
 import { getCompany } from "../../services/companyServices";
 import { createCV } from "../../services/cvServices";
 import { getCurrentTime } from "../../helpers/getTime";
+import { getCookie } from "../../helpers/cookie";
 
 export default function JobDetails() {
     const [loading, setLoading] = useState(false);
@@ -14,6 +15,8 @@ export default function JobDetails() {
     const [city, setCity] = useState();
     const [messageApi, contextHolder] = message.useMessage();
     const param = useParams();
+    const [isSameCompany, setIsSameCompany] = useState(false);
+    const idCompanyC = getCookie('id');
     const [form] = Form.useForm();
 
     const rules = [
@@ -36,23 +39,33 @@ export default function JobDetails() {
         const companyInfo = await getCompany(result.idCompany)
         // console.log(result);
         // console.log(companyInfo);
-        let newData = {
-            address: companyInfo.address,
-            companyName: companyInfo.companyName,
-            ...result
-        };
-        setJob(newData);
-        let abcd = [];
-        for (const city of newData.city) {
-            abcd = [
-                ...abcd,
-                {
-                    label: city,
-                    value: city
-                }
-            ]
+        console.log(result);
+        if (result) {
+            console.log('have data');
+            console.log('id Company in Cookie', Number(idCompanyC));
+            console.log('id Job Company', result.idCompany);
+            if (result.idCompany === Number(idCompanyC)) {
+                console.log('is Same');
+                setIsSameCompany(true);
+            }
+            let newData = {
+                address: companyInfo.address,
+                companyName: companyInfo.companyName,
+                ...result
+            };
+            setJob(newData);
+            let abcd = [];
+            for (const city of newData.city) {
+                abcd = [
+                    ...abcd,
+                    {
+                        label: city,
+                        value: city
+                    }
+                ]
+            }
+            setCity(abcd);
         }
-        setCity(abcd);
     }
 
     // console.log(job);
@@ -148,7 +161,7 @@ export default function JobDetails() {
                                 </Col>
                             </Row>
 
-                            <Button loading={loading} htmlType="submit" type="primary" style={{textTransform: "uppercase"}}>GỬI YÊU CẦU ỨNG TUYỂN</Button>
+                            <Button loading={loading} htmlType="submit" type="primary" disabled={isSameCompany} style={{textTransform: "uppercase"}}>GỬI YÊU CẦU ỨNG TUYỂN</Button>
                         </Form>
                     </Card>
                 </div>

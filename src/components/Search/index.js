@@ -36,7 +36,7 @@ export default function Search() {
     }, [])
 
     const handleSearch = (dataObject) => {
-        // console.log(dataObject);
+        console.log(dataObject);
         if (dataObject.city === undefined) {
             dataObject.city = "";
         }
