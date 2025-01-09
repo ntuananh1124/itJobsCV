@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import GoBack from "../../components/GoBack";
-import { useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import { getJobDetails } from "../../services/jobServices";
 import { Button, Card, Col, Form, Input, Row, Select, Tag, message } from "antd";
 import "./JobDetails.scss"
@@ -8,6 +8,7 @@ import { getCompany } from "../../services/companyServices";
 import { createCV } from "../../services/cvServices";
 import { getCurrentTime } from "../../helpers/getTime";
 import { getCookie } from "../../helpers/cookie";
+// import UploadFile from "../../components/UploadFile";
 
 export default function JobDetails() {
     const [loading, setLoading] = useState(false);
@@ -18,6 +19,8 @@ export default function JobDetails() {
     const [isSameCompany, setIsSameCompany] = useState(false);
     const idCompanyC = getCookie('id');
     const [form] = Form.useForm();
+    const token = getCookie('token');
+    const navigate = useNavigate();
 
     const rules = [
         {
@@ -39,11 +42,11 @@ export default function JobDetails() {
         const companyInfo = await getCompany(result.idCompany)
         // console.log(result);
         // console.log(companyInfo);
-        console.log(result);
+        // console.log(result);
         if (result) {
-            console.log('have data');
-            console.log('id Company in Cookie', Number(idCompanyC));
-            console.log('id Job Company', result.idCompany);
+            // console.log('have data');
+            // console.log('id Company in Cookie', Number(idCompanyC));
+            // console.log('id Job Company', result.idCompany);
             if (result.idCompany === Number(idCompanyC)) {
                 console.log('is Same');
                 setIsSameCompany(true);
@@ -71,10 +74,11 @@ export default function JobDetails() {
     // console.log(job);
 
     useEffect(() => {
-        fetchApi()
+        fetchApi();
     }, []);
 
     const handleFinish = async (dataObject) => {
+        // console.log(dataObject);
         setLoading(true);
         let finalData = {
             ...dataObject,
@@ -83,17 +87,23 @@ export default function JobDetails() {
             statusRead: false,
             createAt: getCurrentTime()
         }
-        // console.log(finalData);
-        const result = await createCV(finalData);
-
-        if (result) {
-            setLoading(false);
-            messageCustom("success", "Bạn đã gửi CV thành công !");
-            form.resetFields();
+        console.log(finalData);
+        if (token) {
+            const result = await createCV(finalData);
+    
+            if (result) {
+                setLoading(false);
+                messageCustom("success", "Bạn đã gửi CV thành công !");
+                form.resetFields();
+            }
+            else {
+                setLoading(false);
+                messageCustom("error", "Gửi CV không thành công !");
+            }
         }
         else {
-            setLoading(false);
-            messageCustom("error", "Gửi CV không thành công !");
+            alert('Vui lòng đăng nhập để gửi CV');
+            navigate("/login");
         }
     }
 
@@ -157,6 +167,12 @@ export default function JobDetails() {
                                 <Col span={24}>
                                     <Form.Item rules={rules} label="Link Project đã làm" name="linkProject">
                                         <Input.TextArea placeholder="Vui lòng điền" style={{minHeight: "200px"}} allowClear />
+                                    </Form.Item>
+                                </Col>
+
+                                <Col span={24}>
+                                    <Form.Item rules={rules} label="CV của bạn" name="cv">
+                                        <input type="file" id="myFile" name="cv" />
                                     </Form.Item>
                                 </Col>
                             </Row>
