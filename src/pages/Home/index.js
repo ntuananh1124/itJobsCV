@@ -2,6 +2,7 @@ import Search from "../../components/Search"
 import "./Home.scss";
 import SkillList from '../../components/SkillList';
 import CompanyList from "../../components/CompanyList";
+import CarouselSlide from "../../components/CarouselSlide";
 
 export default function Home() {
     return (
@@ -10,6 +11,7 @@ export default function Home() {
                 <h2>IT Jobs for Developers</h2>
                 <Search />
                 <SkillList />
+                <CarouselSlide />
                 <CompanyList />
             </div>
         </>
