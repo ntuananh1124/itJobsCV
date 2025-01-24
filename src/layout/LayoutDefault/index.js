@@ -51,6 +51,29 @@ export default function LayoutDefault() {
             <main>
                 <Outlet />
             </main>
+
+            <footer className="footer">
+                <div className="footer_main">
+                    <ul>
+                        <h4>Về chúng tôi</h4>
+                        <li>Giới thiệu</li>
+                        <li>Tuyển dụng</li>
+                        <li>Điều khoản</li>
+                        <li>Chính sách hoạt động</li>
+                    </ul>
+                    <ul>
+                        <h4>Liên hệ</h4>
+                        <li>Gmail</li>
+                        <li>Telegram</li>
+                        <li>Facebook</li>
+                    </ul>
+                    <ul>
+                        <h4>FAQ</h4>
+                        <li>Câu hỏi thường gặp</li>
+                        <li>Giới thiệu về ITJOBS</li>
+                    </ul>
+                </div>
+            </footer>
         </>
     )
 }
