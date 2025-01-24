@@ -43,7 +43,7 @@ export default function DetailsCV() {
                             <span>Link Project:</span>
                             <p>{cvDetails.linkProject}</p>
                             <span>CV:</span>
-                            <p>{cvDetails.cv ? cvDetails.cv : "Chua co cv"}</p>
+                            <p>{cvDetails.cv.name ? cvDetails.cv : "Chua co cv"}</p>
                         </Card>
                     </Col>
                     {jobDetails && 

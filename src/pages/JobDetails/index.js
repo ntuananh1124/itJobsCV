@@ -14,6 +14,7 @@ export default function JobDetails() {
     const [loading, setLoading] = useState(false);
     const [job, setJob] = useState({});
     const [city, setCity] = useState();
+    const [file, setFiles] = useState();
     const [messageApi, contextHolder] = message.useMessage();
     const param = useParams();
     const [isSameCompany, setIsSameCompany] = useState(false);
@@ -82,6 +83,7 @@ export default function JobDetails() {
         setLoading(true);
         let finalData = {
             ...dataObject,
+            cv: file,
             idCompany: job.idCompany,
             idJob: job.id,
             statusRead: false,
@@ -105,6 +107,13 @@ export default function JobDetails() {
             alert('Vui lòng đăng nhập để gửi CV');
             navigate("/login");
         }
+    }
+
+    // File Handle
+
+    const handleChangeFile = (event) => {
+        console.log(event.target.files[0]);
+        setFiles(event.target.files[0]);
     }
 
     return (
@@ -171,9 +180,9 @@ export default function JobDetails() {
                                 </Col>
 
                                 <Col span={24}>
-                                    <Form.Item rules={rules} label="CV của bạn" name="cv">
-                                        <input type="file" id="myFile" name="cv" />
-                                    </Form.Item>
+                                    
+                                    <input type="file" id="myFile" name="cv" onChange={handleChangeFile}/>
+                                    
                                 </Col>
                             </Row>
 

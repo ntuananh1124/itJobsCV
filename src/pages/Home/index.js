@@ -3,6 +3,7 @@ import "./Home.scss";
 import SkillList from '../../components/SkillList';
 import CompanyList from "../../components/CompanyList";
 import CarouselSlide from "../../components/CarouselSlide";
+import JobsList from "../../components/JobsList";
 
 export default function Home() {
     return (
@@ -12,6 +13,7 @@ export default function Home() {
                 <Search />
                 <SkillList />
                 <CarouselSlide />
+                <JobsList />
                 <CompanyList />
             </div>
         </>
