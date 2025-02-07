@@ -18,7 +18,6 @@ export default function JobsList() {
                     ...itemData
                 }
             })
-            console.log(newData.slice(-4));
             setJobsList(newData.slice(-4).reverse());
         };
     }

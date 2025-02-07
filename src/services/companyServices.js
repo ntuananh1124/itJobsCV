@@ -4,6 +4,10 @@ export const getCompanyList = async () => {
     const response = await get(`company`);
     return response;
 }
+export const getCompanyListPagi = async (pageNum, perPage) => {
+    const res = await get(`company?_page=${pageNum}&_limit=${perPage}`);
+    return res;
+}
 
 export const getCompany = async (id) => {
     const response = await get(`company/${id}`);

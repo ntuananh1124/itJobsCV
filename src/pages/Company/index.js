@@ -2,20 +2,28 @@ import './Company.scss';
 import GoBack from "../../components/GoBack";
 import { Row, Col, Card } from "antd";
 import { Link } from 'react-router-dom';
-import { getCompanyList } from '../../services/companyServices';
+import { getCompanyListPagi } from '../../services/companyServices';
 import { useEffect, useState } from 'react';
+import { Pagination } from 'antd';
 
 export default function Company() {
-    const [companyList, setCompanyList] = useState([]); 
+    const [page, setPage] = useState(1);
+    const [limit, setLimit] = useState(4);
+    const [companyList, setCompanyList] = useState([]);
 
     const fetchApi = async () => {
-        const result = await getCompanyList();
+        const result = await getCompanyListPagi(page, limit);
         setCompanyList(result);
-    }
+    };
 
     useEffect(() => {
         fetchApi();
-    },[])
+    },[page]);
+
+    const onSizeChange = (crr, pageSize) => {
+        // console.log(crr, pageSize);
+        setPage(crr);
+    };
 
     return (
         <>
@@ -26,7 +34,7 @@ export default function Company() {
                     {companyList.length > 0 && companyList.map((company, companyIndex) => 
                         <>
                             <Col xxl={6} xl={6} lg={12} md={12} sm={24} xs={24} key={company.id}>
-                                <Card title={company.companyName} style={{width: 300}} extra={<Link to={"/company/" + company.id}>Thêm</Link>}>
+                                <Card title={company.companyName} style={{width: 300}} key={company.id} extra={<Link to={"/company/" + company.id}>Thêm</Link>}>
                                     <p>Số người cần tuyển: <b>{company.quantityPeople}</b></p>
                                     <p>Địa chỉ: <b>{company.address}</b></p>
                                 </Card>
@@ -34,6 +42,13 @@ export default function Company() {
                         </>
                     )}
                 </Row>
+                <Pagination
+                    // showSizeChanger
+                    onChange={onSizeChange}
+                    current={page}
+                    // align="center"
+                    total={30}
+                />
             </div>
         </>
     )

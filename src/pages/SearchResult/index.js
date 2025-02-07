@@ -11,7 +11,7 @@ export default function SearchResult() {
     const [searchParams, setSearchParams] = useSearchParams();
     const citySearchValue = searchParams.get("city") || ""; // lấy ra value của params "city", nếu ng dùng k truyền vào params này thì để value là rỗng
     // console.log(citySearchValue);
-    // const keywordSearchValue = searchParams.get("keyword") || ""; // lấy ra value của params "keyword", nếu ng dùng k truyền vào params này thì để value là rỗng
+    const keywordSearchValue = searchParams.get("keyword") || ""; // lấy ra value của params "keyword", nếu ng dùng k truyền vào params này thì để value là rỗng
     // console.log(keywordSearchValue);
     const tagSearchValue = searchParams.get("tag") || "";
 
@@ -22,9 +22,9 @@ export default function SearchResult() {
                 const resultData = allJobResult.filter((jobItem) => {
                     const city = citySearchValue ? jobItem.city?.includes(citySearchValue) : true;
                     const tag = tagSearchValue ? jobItem.tags?.includes(tagSearchValue) : true;
-                    // const keyword = keywordSearchValue ? jobItem.name.split(" ")?.includes(keywordSearchValue) : true;
+                    const keyword = keywordSearchValue ? jobItem.name.split(" ")?.includes(keywordSearchValue) : true;
                     const status = jobItem.status;
-                    return city && tag && status;
+                    return city && tag && status && keyword;
                 })
                 setData(resultData.reverse());
             }
