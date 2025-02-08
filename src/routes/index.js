@@ -17,6 +17,9 @@ import DetailsJob from "../pages/Admin/DetailsJob";
 import EditJob from "../components/EditJob";
 import DetailsCV from "../pages/Admin/DetailsCV";
 import SearchResult from "../pages/SearchResult";
+import UserInfo from "../pages/UserInfo";
+import UserHistory from "../pages/UserHistory";
+import UserCV from "../pages/UserCV";
 
 export const routes = [
     {
@@ -54,6 +57,18 @@ export const routes = [
             {
                 path: "search",
                 element: <SearchResult />
+            },
+            {
+                path: "user-info",
+                element: <UserInfo />
+            },
+            {
+                path: "user-cv",
+                element: <UserCV />
+            },
+            {
+                path: "user-history",
+                element: <UserHistory />
             },
             {
                 path: "*",

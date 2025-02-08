@@ -38,7 +38,7 @@ export default function JobsList() {
                                         <Link to={`search?tag=${tagItem || ""}`} key={tagIndex + 1}><Tag color="processing">{tagItem}</Tag></Link>
                                     ))}</p>
                                     <p className="overflow">Thành phố: {job.city.map((cityItem, cityIndex) => (
-                                        <Link to={`search?tag=${cityItem || ""}`} key={cityIndex + 1}><Tag color="warning">{cityItem}</Tag></Link>
+                                        <Link to={`search?city=${cityItem || ""}`} key={cityIndex + 1}><Tag color="warning">{cityItem}</Tag></Link>
                                     ))}</p>
                                     <p>Công ty: <strong>{job.infoCompany.companyName}</strong></p>
                                     <p>Lương: <strong>{job.salary}$</strong></p>

@@ -6,6 +6,7 @@ import GoBack from '../../components/GoBack';
 import { checkExist, registerAccount } from "../../services/companyServices";
 import { generateToken } from '../../helpers/token';
 import { UserOutlined, HomeOutlined } from '@ant-design/icons';
+import { checkExistUser, registerAccountUser } from "../../services/usersServices";
 
 export default function Register() {
     const [messageApi, contextHolder] = message.useMessage();
@@ -67,21 +68,37 @@ export default function Register() {
     }
 
     const handleRegisterUser = async (userData) => {
+        console.log(userData);
         setSpinning(true);
-        setTimeout(() => {
-            setSpinning(false);
-            messageCustom("success", "Đăng kí tài khoản thành công");
-        }, 1000)
+        const finalUserData = {
+            userName: userData.username,
+            fullName:  userData.fullName,
+            email: userData.email,
+            password: userData.password,
+            phoneNumber:  userData.phone,
+            token: generateToken(20)
+        }
+        const isExist = await checkExistUser(userData.email);
+        if (isExist.length === 0) {
+            const result = await registerAccountUser(finalUserData);
+            if (result) {
+                setSpinning(false);
+                messageCustom("success", "Đăng kí tài khoản thành công");
+                setTimeout(() => {
+                    navigate("/login");
+                }, 1000);
+            }
+        }
+        else {
+            setSpinning(false)
+            messageCustom("warning", "Email này đã được dùng để đăng kí");
+        }
     }
 
     // check terms
     const handleChange = (e) => {
         let checked = e.target.checked;
         checked ? setDisabled(false) : setDisabled(true);
-        // if (checked === true) {
-        //     setDisabled(false);
-        // }
-        // else setDisabled(true)
     }
 
     // change Segment
@@ -159,8 +176,12 @@ export default function Register() {
                             <h2 className="register__name">Đăng kí tài khoản cho cá nhân</h2>
                             <div className="register__form">
                                 <Form onFinish={handleRegisterUser}>
-                                    <Form.Item label="Tên cuả bạn" name="username" rules={rules}>
-                                        <Input placeholder="Tên cuả bạn" style={inputStyles}/>
+                                    <Form.Item label="Tên người dùng" name="userName" rules={rules}>
+                                        <Input placeholder="Tên người dùng" style={inputStyles}/>
+                                    </Form.Item>
+
+                                    <Form.Item label="Họ và tên" name="fullName" rules={rules}>
+                                        <Input placeholder="Điền họ và tên của bạn" style={inputStyles}/>
                                     </Form.Item>
 
                                     <Form.Item label="Email" name="email" rules={rules}>
@@ -171,7 +192,7 @@ export default function Register() {
                                         <Input.Password placeholder="Mật khẩu của bạn" style={inputStyles}/>
                                     </Form.Item>
 
-                                    <Form.Item label="Số điện thoại" name="phone">
+                                    <Form.Item label="Số điện thoại" name="phoneNumber">
                                         <Input placeholder="Vui lòng điền số điện thoại của bạn" style={inputStyles}/>
                                     </Form.Item>
 

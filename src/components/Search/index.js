@@ -68,6 +68,10 @@ export default function Search() {
 
         let tag = dataObject.tag || "";
         tag = dataObject.tag === "Tất cả" ? "" : tag;
+
+        if (dataObject.keyword === undefined) {
+            dataObject.keyword = "";
+        };
         navigate(`search?city=${dataObject.city}&tag=${dataObject.tag || ""}&keyword=${dataObject.keyword}`);
     }
 

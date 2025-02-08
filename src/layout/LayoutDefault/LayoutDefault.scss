@@ -95,3 +95,35 @@ body {
         top: 0;
     }
 }
+
+.ant-popover-content p {
+    margin: 0;
+}
+
+.user-info {
+    @include d-flex();
+    column-gap: 10px;
+    cursor: pointer;
+    margin-right: 15px;
+    align-items: center;
+
+    &-list {
+        margin: 0;
+        padding: 0;
+    }
+
+    &-item {
+        list-style-type: none;
+        position: relative;
+        padding: 5px 9px;
+
+        &::before {
+            content: "";
+            width: 80%;
+            height: 1px;
+            background-color: #9b9b9b;
+            position: absolute;
+            top: 0;
+        }
+    }
+}
